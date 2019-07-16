@@ -8,15 +8,24 @@ public class Account {
 	//A First Name
 	//A last Name
 	
-	
-	
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", accountNumber=" + accountNumber + ", firstName=" + firstName + ", lastName="
+				+ lastName + "]";
+	}
+
 	private int id;
 	private int accountNumber;
 	private String firstName;
 	private String lastName;
 	
-	public Account(int accountNumber, String firstName, String lastName) {
+	public Account() {
 		super();
+	}
+	
+	public Account(int id ,int accountNumber, String firstName, String lastName) {
+		super();
+		this.id = id;
 		this.accountNumber = accountNumber;
 		this.firstName = firstName;
 		this.lastName = lastName;

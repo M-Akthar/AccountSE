@@ -3,10 +3,7 @@ package com.qa.persistence.repository;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.security.auth.login.AccountNotFoundException;
-
 import com.qa.persistence.domain.Account;
-import com.qa.util.JSONUtil;
 
 public class AccountMapRepository implements AccountRepository{
 	
@@ -41,8 +38,7 @@ public class AccountMapRepository implements AccountRepository{
 	public String createAccount(int accountNumber, String firstName, String lastName) {
 		// TODO Auto-generated method stub
 		
-		Account acc = new Account(accountNumber, firstName, lastName);
-		acc.setId(count);
+		Account acc = new Account(this.count,accountNumber, firstName, lastName);
 		
 		accountMap.put(acc.getId(), acc);
 		
