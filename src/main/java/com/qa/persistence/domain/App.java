@@ -11,6 +11,9 @@ public class App {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		// I normally would not put logic within a main method.
+		// However this is for tutorial purposes.
+		
 		AccountMapRepository acm = new AccountMapRepository();
 		
 		System.out.println(acm.createAccount(1234, "Mr", "Ak"));
