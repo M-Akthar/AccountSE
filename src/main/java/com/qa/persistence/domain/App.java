@@ -1,5 +1,9 @@
 package com.qa.persistence.domain;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.persistence.repository.AccountMapRepository;
 
 public class App {
@@ -26,6 +30,29 @@ public class App {
 		System.out.println("---------------------- Line Break ---------------------------");
 		
 		acm.getAllAccounts();
+		
+//		Maven Exercise
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Account exampleObj = new Account(5, 12345678, "John", "Rambo");
+		
+		try {
+			String jsonString = mapper.writeValueAsString(exampleObj);
+			
+			Account jsonObj = mapper.readValue(jsonString, Account.class);
+			
+			System.out.println(jsonString);
+			
+			System.out.println(jsonObj);
+			
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
