@@ -92,10 +92,24 @@ public class AccountMapRepository implements AccountRepository{
 		return message;
 	}
 	
-	public String duplicateFirstNames(String input) {
-		String output = "";
+	public int accountsWithFirstNames(String input) {
+		int count = 0;
 		
-		return output;
+		for(int id: accountMap.keySet()) {
+			
+			boolean condition = input.toLowerCase()
+					.equals(accountMap.get(id).getFirstName().toLowerCase());
+			
+			if(condition) {
+				count++;
+			} else {
+				continue;
+			}
+			
+		}
+		
+		System.out.println(count);
+		return count;
 	}
 
 }
