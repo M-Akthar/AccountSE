@@ -38,7 +38,7 @@ public class AccountMapRepository implements AccountRepository{
 	public String createAccount(int accountNumber, String firstName, String lastName) {
 		// TODO Auto-generated method stub
 		
-		Account acc = new Account(this.count,accountNumber, firstName, lastName);
+		Account acc = new Account(this.count, accountNumber, firstName, lastName);
 		
 		accountMap.put(acc.getId(), acc);
 		
@@ -90,6 +90,26 @@ public class AccountMapRepository implements AccountRepository{
 //		createAccount(newAccountNumber, firstName, lastName);
 		
 		return message;
+	}
+	
+	public int accountsWithFirstNames(String input) {
+		int count = 0;
+		
+		for(int id: accountMap.keySet()) {
+			
+			boolean condition = input.toLowerCase()
+					.equals(accountMap.get(id).getFirstName().toLowerCase());
+			
+			if(condition) {
+				count++;
+			} else {
+				continue;
+			}
+			
+		}
+		
+		System.out.println(count);
+		return count;
 	}
 
 }
