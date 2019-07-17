@@ -20,8 +20,7 @@ public class Account {
 				+ lastName + "]";
 	}
 
-	@Id	
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int accountNumber;
 	private String firstName;
