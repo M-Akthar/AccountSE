@@ -11,7 +11,7 @@ public class App {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		// Normally I would not put logic within a main method.
+		// Normally, I would not put logic within a main method.
 		// However this is for tutorial purposes.
 		
 		AccountMapRepository amr = new AccountMapRepository();
@@ -56,8 +56,6 @@ public class App {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-//		TDD
 
 	}
 

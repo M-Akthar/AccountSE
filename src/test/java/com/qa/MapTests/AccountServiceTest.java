@@ -39,15 +39,5 @@ public class AccountServiceTest {
 	public void nameCountTest3() {
 		assertEquals("No results", 1, this.amr.accountsWithFirstNames("JordAn"));
 	}
-//
-//	@Test
-//	public void removeAccountTest() {
-//		fail("TODO");	
-//	}
-//	
-//	@Test
-//	public void remove2AccountsTest() {
-//		fail("TODO");	
-//	}
 
 }
