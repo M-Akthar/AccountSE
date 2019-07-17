@@ -11,65 +11,35 @@ import com.qa.persistence.repository.AccountMapRepository;
 
 public class AccountServiceTest {
 
+	private AccountMapRepository amr;
+	
 	@Before
 	public void setup() {
-	
+		this.amr.createAccount(123456, "Jordan", "Harrison");
+		this.amr.createAccount(123456, "Josh", "Dowling");
+		this.amr.createAccount(123456, "Al", "Bernie");
+		this.amr.createAccount(123456, "Al", "Capone");
+		this.amr.createAccount(123456, "Al", "Pachino");
 	}
 	
 	@Test
-	public void addAccountTest() {
-		fail("TODO");	
+	public void nameCountTest() {
+		assertEquals("No results", 3, this.amr.duplicateFirstNames("Al"));
 	}
 	
-	@Test
-	public void add2AccountsTest() {
-		fail("TODO");	
-	}
-
-	@Test
-	public void removeAccountTest() {
-		fail("TODO");	
-	}
-	
-	@Test
-	public void remove2AccountsTest() {
-		fail("TODO");	
-	}
-	
-	@Test
-	public void remove2AccountTestAnd1ThatDoesntExist() {
-		fail("TODO");	
-	}
-	
-	@Test
-	public void jsonStringToAccountConversionTest() {
-		// testing JSONUtil
-		fail("TODO");	
-	}
-
-
-	@Test
-	public void accountConversionToJSONTest() {
-		//testing JSONUtil
-		fail("TODO");	
-	}
-
-	@Test
-	public void getCountForFirstNamesInAccountWhenZeroOccurances() {
-		//For a later piece of functionality
-		fail("TODO");	
-	}
-	
-	@Test
-	public void getCountForFirstNamesInAccountWhenOne() {
-		//For a later piece of functionality
-		fail("TODO");	
-	}
-
-	@Test
-	public void getCountForFirstNamesInAccountWhenTwo() {
-		//For a later piece of functionality
-		fail("TODO");	
-	}
+//	@Test
+//	public void add2AccountsTest() {
+//		fail("TODO");	
+//	}
+//
+//	@Test
+//	public void removeAccountTest() {
+//		fail("TODO");	
+//	}
+//	
+//	@Test
+//	public void remove2AccountsTest() {
+//		fail("TODO");	
+//	}
 
 }

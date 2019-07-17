@@ -11,28 +11,28 @@ public class App {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		// I normally would not put logic within a main method.
+		// Normally I would not put logic within a main method.
 		// However this is for tutorial purposes.
 		
-		AccountMapRepository acm = new AccountMapRepository();
+		AccountMapRepository amr = new AccountMapRepository();
 		
-		System.out.println(acm.createAccount(1234, "Mr", "Ak"));
-		System.out.println(acm.createAccount(3258, "Al", "Pacino"));
-		System.out.println(acm.createAccount(7894, "Al", "Bernie"));
+		System.out.println(amr.createAccount(1234, "Mr", "Ak"));
+		System.out.println(amr.createAccount(3258, "Al", "Pacino"));
+		System.out.println(amr.createAccount(7894, "Al", "Bernie"));
 		
-		acm.getAllAccounts();
+		amr.getAllAccounts();
 		
-		acm.deleteAccount(2);
-		
-		System.out.println("---------------------- Line Break ---------------------------");
-		
-		acm.getAllAccounts();
-		
-		acm.updateAccount(3, 7519, "Bernie", "Capone");
+		amr.deleteAccount(2);
 		
 		System.out.println("---------------------- Line Break ---------------------------");
 		
-		acm.getAllAccounts();
+		amr.getAllAccounts();
+		
+		amr.updateAccount(3, 7519, "Bernie", "Capone");
+		
+		System.out.println("---------------------- Line Break ---------------------------");
+		
+		amr.getAllAccounts();
 		
 //		Maven Exercise
 		
@@ -56,6 +56,8 @@ public class App {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+//		TDD
 
 	}
 
