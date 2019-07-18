@@ -8,20 +8,29 @@ import org.junit.Test;
 
 import com.qa.persistence.domain.Account;
 import com.qa.persistence.repository.AccountMapRepository;
+import com.qa.util.JSONUtil;
 
 public class AccountServiceTest {
 
 	private AccountMapRepository amr = new AccountMapRepository();
+	private JSONUtil json = new JSONUtil();
 	
 	@Before
 	public void setup() {
 		
-		this.amr.createAccount(123456, "Jordan", "Harrison");
-		this.amr.createAccount(678910, "Josh", "Dowling");
-		this.amr.createAccount(654321, "Josh", "Rambo");
-		this.amr.createAccount(101112, "Al", "Bernie");
-		this.amr.createAccount(131415, "Al", "Capone");
-		this.amr.createAccount(16171819, "Al", "Pachino");
+		Account one = new Account(1, 123456, "Jordan", "Harrison");
+		Account two = new Account(2, 678910, "Josh", "Dowling");
+		Account three = new Account(3, 654321, "Josh", "Rambo");
+		Account four = new Account(4, 101112, "Al", "Bernie");
+		Account five = new Account(5, 131415, "Al", "Capone");
+		Account six = new Account(6, 16171819, "Al", "Pachino");
+		
+		this.amr.createAccount(json.getJSONForObject(one));
+		this.amr.createAccount(json.getJSONForObject(two));
+		this.amr.createAccount(json.getJSONForObject(three));
+		this.amr.createAccount(json.getJSONForObject(four));
+		this.amr.createAccount(json.getJSONForObject(five));
+		this.amr.createAccount(json.getJSONForObject(six));
 		
 	}
 	

@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.qa.persistence.domain.Account;
+import com.qa.util.JSONUtil;
 
 public class AccountMapRepository implements AccountRepository{
 	
 	Map<Integer, Account> accountMap = new HashMap<Integer, Account>();
 	
 	private int count = 1;
+	private JSONUtil json = new JSONUtil();
 	
 	//You must provide concrete implementation for each of these methods
 	//do not change the method signature
@@ -35,20 +37,26 @@ public class AccountMapRepository implements AccountRepository{
 		return message;
 	}
 
-	public String createAccount(int accountNumber, String firstName, String lastName) {
+	public String createAccount(String account) {
 		// TODO Auto-generated method stub
+		Account a = json.getObjectForJSON(account, Account.class);
 		
-		Account acc = new Account(this.count, accountNumber, firstName, lastName);
+//		Account acc = new Account(this.count, accountNumber, firstName, lastName);
 		
-		accountMap.put(acc.getId(), acc);
+//		accountMap.put(acc.getId(), acc);
 		
-		String message = firstName + " " + lastName + " added to account map.";
+		accountMap.put(this.count, a);
+		
+		String message = a.getFirstName() + " " + a.getLastName() + " added to account map.";
 		count++;
 		return message;
 	}
 
-	public String deleteAccount(int id) {
+	public String deleteAccount(String account) {
 		// TODO Auto-generated method stub
+		
+		Account toDel = json.getObjectForJSON(account, Account.class);
+		int id = toDel.getId();
 		
 		String message = "";
 		
