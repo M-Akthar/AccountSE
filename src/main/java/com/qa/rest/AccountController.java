@@ -7,12 +7,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import com.qa.service.AccountServiceImpl;
+import com.qa.service.AccountService;
 
+@Path("/account")
 public class AccountController {
 	
 	@Inject
-	private AccountServiceImpl accService;
+	private AccountService accService;
+	//Not sure about this part. Ask jordan
 	
 	@GET
 	@Path("/getAll")

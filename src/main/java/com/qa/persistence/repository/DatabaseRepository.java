@@ -34,7 +34,6 @@ public class DatabaseRepository implements AccountRepository {
 	public String getAllAccounts() {
 		
         TypedQuery<Account> query = em.createQuery("SELECT a FROM Account a ORDER BY a.ID DESC", Account.class);
-        System.out.println(query.getResultList());
 
 		return json.getJSONForObject(query.getResultList());
 	}
