@@ -1,5 +1,6 @@
 package com.qa.persistence.repository;
 
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -9,6 +10,7 @@ import javax.transaction.Transactional.TxType;
 import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
 
+@Default
 @Transactional(value = TxType.REQUIRED)
 public class DatabaseRepository implements AccountRepository {
 	
