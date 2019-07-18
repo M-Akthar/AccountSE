@@ -1,5 +1,7 @@
 package com.qa.persistence.repository;
 
+import java.util.List;
+
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,7 +13,7 @@ import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
 
 @Default
-@Transactional(value = TxType.REQUIRED)
+@Transactional(value = TxType.SUPPORTS)
 public class DatabaseRepository implements AccountRepository {
 	
 	private JSONUtil json = new JSONUtil();
@@ -21,50 +23,61 @@ public class DatabaseRepository implements AccountRepository {
     @PersistenceContext(unitName = "primary")
     private EntityManager em;
 	
-	@Transactional(value = TxType.SUPPORTS)
-	public String findAnAccount(String firstName) {
-		
-		Account searchResult = em.find(Account.class, firstName);
-		System.out.println(searchResult);
-		return null;
-	}
+//	@Transactional(value = TxType.SUPPORTS)
+//	public String findAnAccount(String firstName) {
+//		
+//		Account searchResult = em.find(Account.class, firstName);
+//		System.out.println(searchResult);
+//		return null;
+//	}
 	
-	@Transactional(value = TxType.SUPPORTS)
 	public String getAllAccounts() {
 		
         TypedQuery<Account> query = em.createQuery("SELECT a FROM Account a ORDER BY a.ID DESC", Account.class);
         System.out.println(query.getResultList());
 
-		return null;
+		return json.getJSONForObject(query.getResultList());
 	}
 
+	@Transactional(value = TxType.REQUIRED)
 	public String createAccount(String account) {
 		
 		
 		Account a = json.getObjectForJSON(account, Account.class);
 		em.persist(a);
 		
-		return null;
+		return SUCCESS;
 	}
 
-	public String deleteAccount(String account) {
-		Account toDel = json.getObjectForJSON(account, Account.class);
-		Account toRem = em.find(Account.class, toDel.getId());
+	@Transactional(value = TxType.REQUIRED)
+	public String deleteAccount(int id) {
+		
+		Account toRem = em.find(Account.class, id);
 		em.remove(toRem);
 
-		return null;
+		return SUCCESS;
 	}
 
-	public String updateAccount(int id, int accountNumber, String firstName, String lastName) {
+	@Transactional(value = TxType.REQUIRED)
+	public String updateAccount(int id, String account) {
 		
+		Account newAccount = json.getObjectForJSON(account, Account.class);
 		Account existing = em.find(Account.class, id);
-		existing.setAccountNumber(accountNumber);
-		existing.setFirstName(firstName);
-		existing.setLastName(lastName);
+		
+		existing.setAccountNumber(newAccount.getAccountNumber());
+		existing.setFirstName(newAccount.getFirstName());
+		existing.setLastName(newAccount.getLastName());
 		
 		em.persist(existing);
 
-		return null;
+		return SUCCESS;
+	}
+	
+	public List<Account> findAccountsByFirstName(String firstName) {
+		TypedQuery<Account> query = em.createQuery("SELECT a FROM Account a WHERE a.firstName = :firstName",
+				Account.class);
+		query.setParameter("firstName", firstName);
+		return query.getResultList();
 	}
 
 }

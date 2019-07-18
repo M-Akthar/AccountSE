@@ -1,9 +1,11 @@
 package com.qa.persistence.repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.inject.Alternative;
+import javax.persistence.TypedQuery;
 
 import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
@@ -55,11 +57,8 @@ public class AccountMapRepository implements AccountRepository{
 		return message;
 	}
 
-	public String deleteAccount(String account) {
+	public String deleteAccount(int id) {
 		// TODO Auto-generated method stub
-		
-		Account toDel = json.getObjectForJSON(account, Account.class);
-		int id = toDel.getId();
 		
 		String message = "";
 		
@@ -78,27 +77,23 @@ public class AccountMapRepository implements AccountRepository{
 		return message;
 	}
 
-	public String updateAccount(int id, int accountNumber, String firstName, String lastName) {
+	public String updateAccount(int id, String account) {
 		// TODO Auto-generated method stub
 		
 		String message = "";
 		
-		if(accountMap.get(id) != null) {
-			
-			accountMap.get(id).setAccountNumber(accountNumber);
-			accountMap.get(id).setFirstName(firstName);
-			accountMap.get(id).setLastName(lastName);
-
-			message = "The account for " + firstName + " " + lastName + " has been updated.";
-		} else {
-			message = "Account not found, please check your id";
-		}
-
-//		I can use a conditional to check if the account number has changed. If the account number
-//		is the same then I can simply do account.put to replace the values using the existing key.
+		Account newAccount = json.getObjectForJSON(account, Account.class);
+		Account existing = accountMap.get(id);
 		
-//		deleteAccount(accountNumber);
-//		createAccount(newAccountNumber, firstName, lastName);
+		if(accountMap.get(id) != null) {
+			existing.setAccountNumber(newAccount.getAccountNumber());
+			existing.setFirstName(newAccount.getFirstName());
+			existing.setLastName(newAccount.getLastName());
+			
+			message = existing.getFirstName() + " " + existing.getLastName() + " has been successfully updated";
+		} else {
+			message = "No account found";
+		}
 		
 		return message;
 	}
@@ -121,6 +116,11 @@ public class AccountMapRepository implements AccountRepository{
 		
 		System.out.println(count);
 		return count;
+	}
+
+	public List<Account> findAccountsByFirstName(String firstName) {
+
+		return null;
 	}
 
 }
